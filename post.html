@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let data = {
+            "name":"SRK",
+            "password":'hi@'
+        }
+
+        let url='https://jsonplaceholder.typicode.com/todos';
+        let option={
+            method:'post',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify(data)
+            
+        };
+        fetch(url,option)
+        .then(function(response){
+            if (response.ok){
+                return response.json();
+            }else{
+                console.error('need to change');
+                return false;
+            }
+        })
+        .then(function(jsonData){
+            console.log(jsonData);
+        });
+        
+        /*let data = {
+    id: 101,
+    uname: 'ravi'
+};
+
+let url = 'https://jsonplaceholder.typicode.com/todos'; // Specify the endpoint URL
+let options = {
+    method: 'POST', // Method should be uppercase
+    headers: {
+        'Content-Type': 'application/json',
+        
+        'Accept': 'application/json', // Quotes around header values
+        'Authorization': 'Bearer 313ee9edbf405991c15eae0079f0e6cf6f8411d3e5e51d18434820a609ae5af2',
+        'Access-Control-Allow-Origin': 'https://jsonplaceholder.typicode.com/todos'
+    },
+    body: JSON.stringify(data) // Convert data to JSON string
+};
+
+async function fetchData() {
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error('Network response was not ok'); // Throw an error for non-ok responses
+        }
+        const jsonData = await response.json();
+        console.log(jsonData);
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error); // Catch any errors
+    }
+}
+
+fetchData();*/
+
+    </script>
+</body>
+</html>

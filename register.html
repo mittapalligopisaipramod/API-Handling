@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/dce405ffaa.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        *{
+            padding: 10px;
+        }
+        .car{
+            width: 390px;
+            border-style: solid;
+            border-radius: 8px;
+            border-width: 0px;
+        }
+        .box{
+            height: 40px;
+            border-style: solid;
+            border-radius: 8px;
+            border-width: 1px;
+            width: 290px;
+            border-color: rgb(206, 199, 199);
+        }
+        .user{
+            text-align: center;
+            background-color:rgb(239, 230, 219);
+            border-style: solid;
+            width: 70px;
+            height: 70px;
+            border-radius: 60px;
+            padding: 10px;
+            border-width: 0px;
+        }
+        .icon{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="d-flex flex-row justify-content-center">
+    <div class="shadow car">
+        <div>
+            <div class=" user m-auto">
+                <i class="fa-regular fa-user fa-2xl icon"></i>
+            </div>
+            <div style="text-align: center;">
+                <h1 class="main-heading"> SignUp  </h1>
+            </div>
+            <form>
+                <label> Username </label><br/>
+                <input type="text" id="uname" class="box"/>
+                <p id="UsernameError"></p>
+                <label> Password </label><br/>
+                <input type="password" id="upass" class="box"/>
+                <p id="PasswordError"></p>
+                <label> Email </label><br/>
+                <input type="email" id="umail" class="box"/>
+                <p id="UsernameError"></p>
+                <label> Mobile Number </label><br/>
+                <input type="text" id="unumber" class="box"/>
+                <p id="UsernameError"></p>
+                
+                <button class="btn btn-primary" id="btn"> Submit </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        let umailId=document.getElementById('umail');
+        let unumberId=document.getElementById('unumber');
+        let btnId=document.getElementById('btn');
+        let unameId=document.getElementById('uname');
+        let UsernameErrorId=document.getElementById('UsernameError');
+        unameId.addEventListener('blur',function(){
+            if (unameId.value===''){
+                UsernameErrorId.textContent='*Required';
+                UsernameErrorId.style.color='red';
+            }else{
+                UsernameErrorId.textContent='';
+            }
+        });
+        let upassId=document.getElementById('upass');
+        let PasswordErrorId=document.getElementById('PasswordError');
+        upassId.addEventListener('blur',function(){
+            if (upassId.value===''){
+                PasswordErrorId.textContent='*Required';
+                PasswordErrorId.style.color='red';
+            }else{
+                PasswordErrorId.textContent='';
+            }
+        });
+        btnId.addEventListener('click',function(event){
+            event.preventDefault();
+            if (unameId.value===''){
+                PasswordErrorId.textContent='*Required username or password';
+                PasswordErrorId.style.color='red';
+            }
+            else if(upassId.value===''){
+                PasswordErrorId.textContent='*Required password';
+                PasswordErrorId.style.color='red';
+            }
+            else{
+                let obj={
+                    
+                    "uname": unameId.value,
+                    "upass": upassId.value,
+                    "umail": umailId.value,
+                    "unumberId":unumberId.value
+                }
+                let url="http://localhost:8080/login1";
+                let option={
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(obj)
+                }; 
+                fetch(url,option)
+                .then(function(response){
+                    return response.json();
+                })   
+                .then(function(jsonData){
+                    console.log(jsonData);
+                })  
+                //console.log(obj);
+        }
+    });
+    </script>
+</body>
+</html>
